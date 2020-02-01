@@ -7,7 +7,6 @@ module.exports = function(app) {
   app.on('connection', connection => {
     // On a new real-time connection, add it to the anonymous channel
     app.channel('anonymous').join(connection);
-    console.log('NEW CONNECTSION==', connection);
   });
 
   // app.on('join', connection => {
@@ -54,8 +53,8 @@ module.exports = function(app) {
   });
 
   app.service('room').publish((data, context) => {
-    console.log('TCL: data', data);
-    console.log('TCL: context', data);
+    // console.log('TCL: data', data);
+    // console.log('TCL: context', data);
     return app.channel(`room/${data.roomCode}`);
   });
   // Here you can also add service specific event publishers
