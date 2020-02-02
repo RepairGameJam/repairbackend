@@ -18,18 +18,28 @@ exports.Room = class Room extends Service {
       shouldCreate = false;
       roomCode = existingGames[0].roomCode;
     }
-      
+
+    console.log('DATA', data);
+    let userID = data.userID;
+
+    if (existingGames[0]) {
+      existingGames[0].players[userID] = { score: 0 };
+    } else {
+      data.players = {
+        [userID]: { score: 0 }
+      };
+    }
+
     if (params.connection) {
       const room = this.app.channel(`room/${roomCode}`);
       room.join(params.connection);
-      this.emit('status', { holdon: true, roomCode });
     }
     if (shouldCreate) {
       const created = await super.create({ ...data, roomCode }, params);
       console.log('CREATING NEW ROOM', created);
       return created;
     } else {
-      console.log('SENDING EXISTING ROOMS');
+      console.log('SENDING EXISTING ROOMS', existingGames[0]);
       return existingGames[0];
     }
   }

@@ -11,7 +11,16 @@ module.exports = {
       return context;
     }],
     update: [],
-    patch: [],
+    patch: [async context => {
+      if (context.data.players) {
+        const currentObject = await context.service.get(context.arguments[0]);
+        context.data.players = {
+          ...currentObject.players,
+          ...context.data.players
+        };
+      }
+      return context;
+    }],
     remove: []
   },
 
@@ -21,7 +30,13 @@ module.exports = {
     get: [],
     create: [],
     update: [],
-    patch: [],
+    patch: [
+      async (context) => {
+        // emit status update
+        context.service.emit('status', context.result);
+        return context;
+      }
+    ],
     remove: []
   },
 
