@@ -7,6 +7,12 @@ const generateRoomCode = () => {
 
 // const MAX_LEVELS = 3;
 
+const LEVELS = {
+  'level1': 'level1',
+  'level2': 'level2',
+  'level3': 'level3',
+};
+
 exports.Room = class Room extends Service {
   constructor(options, app) {
     super(options);
@@ -41,7 +47,7 @@ exports.Room = class Room extends Service {
       room.join(params.connection);
     }
     if (shouldCreate) {
-      const created = await super.create({ ...data, roomCode }, params);
+      const created = await super.create({ ...data, roomCode, level: LEVELS.level1 }, params);
       console.log('CREATING NEW ROOM', created);
       return created;
     } else {
@@ -69,13 +75,31 @@ exports.Room = class Room extends Service {
   }
 
   async levelComplete(id) {
+    const currentGame = await this.get(id);
     setTimeout(() => {
       this.patch(id, { state: 'leaderboard' });
     }, 200);
 
     setTimeout(() => {
+
       // to do: check if we can set to next level otherwise send complete
-      this.patch(id, { state: 'playing' });
+      let send = {};
+      send.state = 'playing';
+      switch(currentGame.level) {
+      case LEVELS.level1:
+        send.level = LEVELS.level2;
+        break;
+      case LEVELS.level2:
+        send.level = LEVELS.level3;
+        break;
+      default: 
+      case LEVELS.level3:
+        send.level = null;
+        send.state = 'complete';
+        break;
+      }
+
+      this.patch(id, send);
     }, 4200);
   }
 
