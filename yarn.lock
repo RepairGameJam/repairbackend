@@ -151,7 +151,16 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@feathersjs/commons@^4.5.1":
+"@feathersjs/adapter-commons@^4.3.6":
+  version "4.5.1"
+  resolved "https://registry.yarnpkg.com/@feathersjs/adapter-commons/-/adapter-commons-4.5.1.tgz#f73b1b0837765bf24f95e3f90d2614cf9371cbe3"
+  integrity sha512-ekl9hBL4jLyhm3XFcdKY9dZuRvAtL968EmmNcc8TNSV5OsxhTiwCQOYzIIMqgHfdTcGMAAZMskmuCB53/386rw==
+  dependencies:
+    "@feathersjs/commons" "^4.5.1"
+    "@feathersjs/errors" "^4.5.1"
+    "@feathersjs/feathers" "^4.5.1"
+
+"@feathersjs/commons@^4.3.0", "@feathersjs/commons@^4.5.1":
   version "4.5.1"
   resolved "https://registry.yarnpkg.com/@feathersjs/commons/-/commons-4.5.1.tgz#cd18cd9c49f9b06994c285629d97bc0dc271b32a"
   integrity sha512-wSanrV1Tvqf4U8PE4bx+gEdLT0cCuusuoVOvyK4uOlTIOgT85qJMw9MBa99jF7BFF022EzHrpo0CjzwqcMBMIA==
@@ -165,7 +174,7 @@
     config "^3.2.5"
     debug "^4.1.1"
 
-"@feathersjs/errors@^4.4.1", "@feathersjs/errors@^4.5.1":
+"@feathersjs/errors@^4.3.4", "@feathersjs/errors@^4.4.1", "@feathersjs/errors@^4.5.1":
   version "4.5.1"
   resolved "https://registry.yarnpkg.com/@feathersjs/errors/-/errors-4.5.1.tgz#59692b9f3ea2965393d0cf6586b82256195418bc"
   integrity sha512-ztNL+g7pmZm4xYfmgc9ZtHfuWQl83CpCDtkXk3wZB8h4u4U0j1nUE6/QikmwzLS+/wHOnBDI7qSWV9ZnxzX1ww==
@@ -1973,6 +1982,16 @@ fb-watchman@^2.0.0:
   integrity sha512-DkPJKQeY6kKwmuMretBhr7G6Vodr7bFwDYTXIkfG1gjvNpaxBTQV3PbXg6bR1c1UP4jPOX0jHUbbHANL9vRjVg==
   dependencies:
     bser "2.1.1"
+
+feathers-memory@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/feathers-memory/-/feathers-memory-4.1.0.tgz#3cd70e20ebf1dfe4b996e8bf0a22b65cdb8173a3"
+  integrity sha512-tR8DFqLsSk2w7tpSdHjA5RgPHTu3X5R3L3Kob2K+E3b/Q5cDkI6AYQarDQOiwekAyqxkkp/fm7Fg0qYdu4Ua6Q==
+  dependencies:
+    "@feathersjs/adapter-commons" "^4.3.6"
+    "@feathersjs/commons" "^4.3.0"
+    "@feathersjs/errors" "^4.3.4"
+    sift "^8.5.0"
 
 feature-policy@0.3.0:
   version "0.3.0"
@@ -4392,6 +4411,11 @@ shellwords@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/shellwords/-/shellwords-0.1.1.tgz#d6b9181c1a48d397324c84871efbcfc73fc0654b"
   integrity sha512-vFwSUfQvqybiICwZY5+DAWIPLKsWO31Q91JSKl3UYv+K5c2QRPzn0qzec6QPu1Qc9eHYItiP3NdJqNVqetYAww==
+
+sift@^8.5.0:
+  version "8.5.1"
+  resolved "https://registry.yarnpkg.com/sift/-/sift-8.5.1.tgz#22a29e1a3332e8f8d372dc5999f5cc3093778fe8"
+  integrity sha512-um2rEdXrc4YcRMzIliuip4i2o92mJONh5W1VD9vJlm1e0apVqMK4P2ZUijz8BIe1/oYLWmXwXaKFM+fOaO3Ysg==
 
 signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.2"
