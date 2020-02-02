@@ -27,6 +27,14 @@ module.exports = {
           }
         };
       }
+      // reset all players scores if we are complete
+      const currentPlayers = Object.keys(currentObject.players);
+      if (context.data.state === 'playing' && currentObject.state === 'complete') {
+        context.data.players = {};
+        currentPlayers.forEach(playerId => {
+          context.data.players[playerId] = { score: 0 };
+        });
+      }
       return context;
     }],
     remove: []
