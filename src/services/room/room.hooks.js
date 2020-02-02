@@ -29,7 +29,13 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: [],
+    create: [
+      async (context) => {
+        // emit status update
+        context.service.emit('status', context.result);
+        return context;
+      }
+    ],
     update: [],
     patch: [
       async (context) => {

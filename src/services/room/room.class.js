@@ -40,7 +40,8 @@ exports.Room = class Room extends Service {
       return created;
     } else {
       console.log('SENDING EXISTING ROOMS', existingGames[0]);
-      return existingGames[0];
+      const updated = await super.patch(existingGames[0].id, { ...existingGames[0] });
+      return updated;
     }
   }
 
