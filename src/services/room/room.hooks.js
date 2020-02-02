@@ -12,6 +12,7 @@ module.exports = {
     }],
     update: [],
     patch: [async context => {
+      if (context.data.userID) delete context.data.userID;
       if (context.data.players) {
         const currentObject = await context.service.get(context.arguments[0]);
         context.data.players = {
@@ -28,7 +29,13 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: [],
+    create: [
+      async (context) => {
+        // emit status update
+        context.service.emit('status', context.result);
+        return context;
+      }
+    ],
     update: [],
     patch: [
       async (context) => {
