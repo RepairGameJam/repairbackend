@@ -5,6 +5,8 @@ const generateRoomCode = () => {
   return Math.floor(Math.random()*999) + 1000;   
 };
 
+// const MAX_LEVELS = 3;
+
 exports.Room = class Room extends Service {
   constructor(options, app) {
     super(options);
@@ -22,11 +24,15 @@ exports.Room = class Room extends Service {
     let userID = data.userID;
     delete data.userID;
 
+    const STARTING_PLAYER = { 
+      score: 0,
+    };
+
     if (existingGames[0]) {
-      existingGames[0].players[userID] = { score: 0 };
+      existingGames[0].players[userID] = STARTING_PLAYER;
     } else {
       data.players = {
-        [userID]: { score: 0 }
+        [userID]: STARTING_PLAYER
       };
     }
 
@@ -46,7 +52,6 @@ exports.Room = class Room extends Service {
   }
 
   async find(params) {
-    console.log('PARAMS FROM FIND', params);
     super.find(params);
   }
 
@@ -54,6 +59,24 @@ exports.Room = class Room extends Service {
     if (params.connection) {
       this.app.channel(`room/${id}`).leave(params.connection);
     }
+  }
+
+  async patch(id, data, params) {
+    if(data.state === 'levelComplete') {
+      this.levelComplete(id);
+    }
+    return super.patch(id, data, params);
+  }
+
+  async levelComplete(id) {
+    setTimeout(() => {
+      this.patch(id, { state: 'leaderboard' });
+    }, 200);
+
+    setTimeout(() => {
+      // to do: check if we can set to next level otherwise send complete
+      this.patch(id, { state: 'playing' });
+    }, 4200);
   }
 
 };
