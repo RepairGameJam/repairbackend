@@ -19,8 +19,8 @@ exports.Room = class Room extends Service {
       roomCode = existingGames[0].roomCode;
     }
 
-    console.log('DATA', data);
     let userID = data.userID;
+    delete data.userID;
 
     if (existingGames[0]) {
       existingGames[0].players[userID] = { score: 0 };
